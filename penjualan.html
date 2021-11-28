@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tailwind Admin Starter Template : Tailwind Toolbox</title>
+    <meta name="author" content="name">
+    <meta name="description" content="description here">
+    <meta name="keywords" content="keywords,here">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet"> <!--Replace with your tailwind.css once created-->
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet"> <!--Totally optional :) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    
+</head>
+
+
+<body x-data="{ sidebarOpen: false }" x-data="{ checkboxes }" class="bg-gray-800 font-sans leading-normal tracking-normal mt-12">
+
+    <!--Nav-->
+    <nav class="bg-gray-800 pt-2 md:pt-1 pb-1 px-1 mt-0 h-auto fixed w-full z-20 top-0">
+
+        <div class="flex flex-wrap items-center">
+            <div class="flex flex-shrink md:w-1/3 justify-center md:justify-start text-white">
+                <a href="#">
+                    <span class="text-xl pl-2"><i class="em em-grinning"></i></span>
+                </a>
+            </div>
+
+            <div class="flex w-full pt-2 content-center justify-end md:w-1/3 md:justify-end">
+                <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
+                    <li class="flex-1 md:flex-none md:mr-3">
+                        <a class="inline-block py-2 px-4 text-white no-underline" href="#">Active</a>
+                    </li>
+                    <li class="flex-1 md:flex-none md:mr-3">
+                        <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">link</a>
+                    </li>
+                    <li class="flex-1 md:flex-none md:mr-3">
+                        <div class="relative inline-block">
+                            <button onclick="toggleDD('myDropdown')" class="drop-button text-white focus:outline-none"> <span class="pr-2"><i class="em em-robot_face"></i></span> Hi, User <svg class="h-3 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg></button>
+                            <div id="myDropdown" class="dropdownlist absolute bg-gray-800 text-white right-0 mt-3 p-3 overflow-auto z-30 invisible">
+                                <input type="text" class="drop-search p-2 text-gray-600" placeholder="Search.." id="myInput" onkeyup="filterDD('myDropdown','myInput')">
+                                <a href="#" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-user fa-fw"></i> Profile</a>
+                                <a href="#" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-cog fa-fw"></i> Settings</a>
+                                <div class="border border-gray-800"></div>
+                                <a href="#" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <ul class="flex flex-row flex-wrap flex-grow container mx-auto list-reset flex border-b text-base bounce-in-right">
+                <button class="p-1 mr-4" @click="sidebarOpen = !sidebarOpen">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                  </button>
+                <li class="mr-1">
+                    <a href="https://www.tailwindtoolbox.com/starter-templates" class="my-2 py-2 no-underline hover:no-underline text-white hover:text-white flex items-center justify-center bg-transparent hover:bg-brand focus:border-teal-900 px-5 rounded">
+                        <span class="pl-2">PENJUALAN</span></a>
+                </li>
+                <li class="mr-1">
+                    <a href="https://www.tailwindtoolbox.com/starter-components" class="my-2 py-2 no-underline hover:no-underline text-white hover:text-white flex items-center justify-center bg-transparent hover:bg-brand focus:border-teal-900 px-5 rounded">
+                        <span class="pl-2">KEUANGAN</span></a>
+                </li>
+                <li class="mr-1">
+                    <a href="https://www.tailwindtoolbox.com/kits" class="my-2 py-2 no-underline hover:no-underline text-white hover:text-white flex items-center justify-center bg-transparent hover:bg-brand focus:border-teal-900 px-5 rounded">
+                        <span class="pl-2">PENGATURAN</span></a>
+                </li>
+                <li class="mr-1">
+                    <a href="https://www.tailwindtoolbox.com/generators" class="my-2 py-2 no-underline hover:no-underline text-white hover:text-white flex items-center justify-center bg-transparent hover:bg-brand focus:border-teal-900 px-5 rounded">
+                        <span class="pl-2">TOKO ONLINE</span></a>
+                </li>
+                <li class="mr-1">
+                    <a href="https://www.tailwindtoolbox.com/marketplace" class="my-2 py-2 no-underline hover:no-underline text-white hover:text-white flex items-center justify-center bg-transparent hover:bg-brand focus:border-teal-900 px-5 rounded">
+                        <span class="pl-2">LAYANAN</span></a>
+                </li>
+                <div class="flex flex-1 md:w-1/3 justify-center md:justify-start text-white px-2">
+                    <span class="relative w-full">
+                        <input type="search" placeholder="Search" class="w-full bg-gray-900 text-white transition border border-transparent focus:outline-none focus:border-gray-400 rounded py-3 px-2 pl-10 appearance-none leading-normal">
+                        <div class="absolute search-icon" style="top: 1rem; left: .8rem;">
+                            <svg class="fill-current pointer-events-none text-white w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
+                            </svg>
+                        </div>
+                </span>
+                </div>
+               
+            </ul>
+           
+        </div>
+       
+
+
+    </nav>
+    
+
+
+    <div class="flex flex-col md:flex-row">
+
+        <aside class="flex overflow-x-hidden overflow-y-none mt-12 min-h-screen">
+            <div class="bg-gray-800 shadow-xl h-screen fixed bottom-0 mt-px md:relative md:h-screen z-10 w-full md:w-48 transition-all duration-300" :class="{ '-ml-64': !sidebarOpen }">
+              <nav class="md:mt-px md:w-48 md:left-0 md:top-0 content-center md:content-start text-left justify-between flex-1 flex flex-col">
+                <ul class="list-reset flex flex-row md:flex-col py-0 md:py-3 px-1 md:px-2 text-center md:text-left">
+                    <li class="mr-3 flex-1">
+                        <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
+                            <i class="fa fa-dashboard pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <span class="pb-1 md:pb-0 text-xs text-gray-600 md:text-gray-400 block md:inline-block">MASTER</span>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="kategori.html" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
+                            <i class="fa fa-cube pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Kategori</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="produk.html" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
+                            <i class="fa fa-cubes pr-0 md:pr-3 text-blue-600"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Produk</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="member.html" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
+                            <i class="fa fa-id-card pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Member</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="suplier.html" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
+                            <i class="fa fa-truck pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Suplier</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                       <span class="pb-1 md:pb-0 text-xs text-gray-600 md:text-gray-400 block md:inline-block">TRANSAKSI</span>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="pengeluaran.html" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
+                            <i class="fa fa-envelope pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Pengeluaran</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="pembelian.html" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
+                            <i class="fas fa-chart-area pr-0 md:pr-3 text-blue-600"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Pembelian</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="penjualan.html" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
+                            <i class="fa fa-wallet pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Penjualan</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="transaksiAktif.html" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
+                            <i class="fas fa-tasks pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Transaksi Aktif</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="transaksiBaru.html" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
+                            <i class="fa fa-envelope pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Transaksi Baru</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <span class="pb-1 md:pb-0 text-xs text-gray-600 md:text-gray-400 block md:inline-block">REPORT</span>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="laporan.html" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
+                            <i class="fas fa-chart-area pr-0 md:pr-3 text-blue-600"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Laporan</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <span class="pb-1 md:pb-0 text-xs text-gray-600 md:text-gray-400 block md:inline-block">SYSTEM</span>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="user.html" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
+                            <i class="fa fa-wallet pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">User</span>
+                        </a>
+                    </li>
+                    <li class="mr-3 flex-1">
+                        <a href="pengaturan.html" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
+                            <i class="fas fa-tasks pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Pengaturan</span>
+                        </a>
+                    </li>
+                </ul>
+              </nav>
+            </div>
+        </aside>
+
+        <div class="main-content flex-1 bg-gray-100 mt-4 md:mt-2 pb-24 md:pb-5">
+
+            <div class="bg-gray-800 pt-3 w-full ">
+                <div class="rounded-tl-3xl bg-gradient-to-r from-blue-900 to-gray-800 p-4 shadow text-2xl text-white">
+                    
+                </div>
+            </div>
+            
+            <div class="container mx-auto px-4 sm:px-8 w-full">
+                <div class="py-8">
+                    <div class="flex justify-between mb-4">
+                        <h2 class="text-2xl leading-tight">
+                            Daftar Penjualan
+                        </h2>
+                        <div class="">
+                            <button class=" flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-sm shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200" type="submit">
+                                Tambah Penjualan
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                                <div x-data="{ isOpen: false}" class="relative inline-block text-left">
+                                    <div class="w-20">
+                                        <button @click="isOpen = !isOpen" 
+                                                @keydown.escape="isOpen = false" 
+                                                type="button" class=" border border-gray-300 bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center w-full rounded-md  px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500" id="options-menu">
+                                            Show
+                                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1408 704q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div x-show="isOpen"
+                                         @click.away="isOpen = false"
+                                         class="origin-top-right absolute mt-2 w-20 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+                                        <div class="py-1 divide-y divide-gray-100" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                            <a href="#" class="flex items-center block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
+                                                <span class="flex flex-col">
+                                                    <span>
+                                                        10
+                                                    </span>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="flex items-center block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
+                                                <span class="flex flex-col">
+                                                    <span>
+                                                        25
+                                                    </span>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="flex items-center block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
+                                                <span class="flex flex-col">
+                                                    <span>
+                                                        50
+                                                    </span>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="flex items-center block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
+                                                <span class="flex flex-col">
+                                                    <span>
+                                                        100
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <form class="flex flex-col md:flex-row w-3/4 md:w-full max-w-sm justify-end">
+                                    <div class=" relative ">
+                                        <input type="text" id="&quot;form-subscribe-Filter" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Cari Penjualan"/>
+                                    </div>
+                                </form>
+                        </div>
+                        <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                            <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                                <table class="min-w-full leading-normal">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="px-5 py-3 bg-gray-100 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
+                                                Tanggal
+                                            </th>
+                                            <th scope="col" class="px-5 py-3 bg-gray-100 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
+                                                Kode Member
+                                            </th>
+                                            <th scope="col" class="px-5 py-3 bg-gray-100 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
+                                                Total Item
+                                            </th>
+                                            <th scope="col" class="px-5 py-3 bg-gray-100 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
+                                                Total Harga
+                                            </th>
+                                            <th scope="col" class="px-5 py-3 bg-gray-100 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
+                                                Diskon
+                                            </th>
+                                            <th scope="col" class="px-5 py-3 bg-gray-100 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
+                                                Total Bayar
+                                            </th>
+                                            <th scope="col" class="px-5 py-3 bg-gray-100 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
+                                                Kasir
+                                            </th>
+                                            <th scope="col" class="px-5 py-3 bg-gray-100 border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
+                                                Aksi
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    25 September 2021
+                                                </p>
+                                            </td>
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    M-0001
+                                                </p>
+                                            </td>
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    12
+                                                </p>
+                                            </td>
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    Rp. 59.000
+                                                </p>
+                                            </td>
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    Rp. 0
+                                                </p>
+                                            </td>
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    Rp. 60.000
+                                                </p>
+                                            </td>
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    Herdi
+                                                </p>
+                                            </td>
+                                            <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                                <button href="#" class="p-2 bg-blue-600 rounded-sm text-white hover:text-gray-900">
+                                                    Edit
+                                                </button>
+                                                <button href="#" class="p-2 bg-red-600 rounded-sm text-white hover:text-gray-900">
+                                                    Hapus
+                                                </button>
+                                            </td>
+                                    </tbody>
+                                </table>
+                                <div class="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between">
+                                    <div class="flex items-center">
+                                        <button type="button" class="w-full p-4 border text-base rounded-l-xl text-gray-600 bg-white hover:bg-gray-100">
+                                            <svg width="9" fill="currentColor" height="8" class="" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1427 301l-531 531 531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19l-742-742q-19-19-19-45t19-45l742-742q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                        <button type="button" class="w-full px-4 py-2 border-t border-b text-base text-indigo-500 bg-white hover:bg-gray-100 ">
+                                            1
+                                        </button>
+                                        <button type="button" class="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100">
+                                            2
+                                        </button>
+                                        <button type="button" class="w-full px-4 py-2 border-t border-b text-base text-gray-600 bg-white hover:bg-gray-100">
+                                            3
+                                        </button>
+                                        <button type="button" class="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100">
+                                            4
+                                        </button>
+                                        <button type="button" class="w-full p-4 border-t border-b border-r text-base  rounded-r-xl text-gray-600 bg-white hover:bg-gray-100">
+                                            <svg width="9" fill="currentColor" height="8" class="" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <script>
+        const chart = new Chart(document.getElementById("myChart"), {
+    type: "line",
+    data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July", "Aug", "Sep", "Nov", "Dec"],
+        datasets: [
+            {
+                label: "16 Mar 2018",
+                borderColor: "#4A5568",
+                data: [600, 400, 620, 300, 200, 600, 230, 300, 200, 200, 100, 1200],
+                fill: false,
+                pointBackgroundColor: "#4A5568",
+                borderWidth: "3",
+                pointBorderWidth: "4",
+                pointHoverRadius: "6",
+                pointHoverBorderWidth: "8",
+                pointHoverBorderColor: "rgb(74,85,104,0.2)",
+            },
+        ],
+    },
+    options: {
+        legend: {
+            position: false,
+        },
+        scales: {
+            yAxes: [
+                {
+                    gridLines: {
+                        display: false,
+                    },
+                    display: false,
+                },
+            ],
+        },
+    },
+});
+
+    </script>
+
+    <script>
+        /*Toggle dropdown list*/
+        function toggleDD(myDropMenu) {
+            document.getElementById(myDropMenu).classList.toggle("invisible");
+        }
+        /*Filter dropdown options*/
+        function filterDD(myDropMenu, myDropMenuSearch) {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById(myDropMenuSearch);
+            filter = input.value.toUpperCase();
+            div = document.getElementById(myDropMenu);
+            a = div.getElementsByTagName("a");
+            for (i = 0; i < a.length; i++) {
+                if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                } else {
+                    a[i].style.display = "none";
+                }
+            }
+        }
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.drop-button') && !event.target.matches('.drop-search')) {
+                var dropdowns = document.getElementsByClassName("dropdownlist");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (!openDropdown.classList.contains('invisible')) {
+                        openDropdown.classList.add('invisible');
+                    }
+                }
+            }
+        }
+    </script>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('checkboxes', () => ({
+            selectAll: false,
+            itemsCard: [],
+
+            selectAllCheckboxes() {
+                this.selectAll = !this.selectAll
+
+                let checkboxes = document.querySelectorAll('.item-select-input');
+                let allValues = [];
+
+                [...checkboxes].map((el) => {
+                    allValues.push(el.value)
+
+                    this.itemsCard = this.selectAll ? allValues : []
+                })
+            }
+        }))
+    })
+</script>
+
+</body>
+
+</html>
